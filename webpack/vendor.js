@@ -5,6 +5,7 @@ const
     webpack = require('webpack'),
     config = require('./config');
 
+
 module.exports = {
     entry: {
         vendor: config.vendor

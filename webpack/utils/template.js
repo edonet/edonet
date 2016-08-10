@@ -75,13 +75,19 @@ TemplateWebpackPlugin.prototype.apply = function(compiler) {
                 srcTpl = path.join(src, options.name);
                 distTpl = path.join(dist, options.name);
             } else {
-                srcTpl = path.join(__dirname, 'index.html');
+                srcTpl = path.join(__dirname, 'template.tpl');
                 distTpl = path.join(dist, 'index.html');
             }
 
             // 生成模板文件
             utils.copyFile(srcTpl, distTpl, function (chunk) {
-                let str = chunk.toString();
+                let str = chunk.toString(),
+                    regexp = /<%-\s*([\w:-]+)\s*%>/g;
+
+
+                str = str.replace(regexp, function (find, $1) { console.log($1, options[$1]);
+                    return options[$1] || '';
+                });
 
                 if (styles) {
                     str = str.replace('</head>', styles);

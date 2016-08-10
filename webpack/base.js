@@ -6,7 +6,9 @@ const
 
 module.exports = {
     entry: {
-        app: path.join(config.src, config.main)
+        app: [
+            path.join(config.src, config.main)
+        ]
     },
     output: {
         path: config.dist,

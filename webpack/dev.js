@@ -3,7 +3,8 @@
 const
     webpack = require('webpack'),
     config = require('./config'),
-    base = require('./base.config');
+    base = require('./base'),
+    Template = require('./utils/template');
 
 
 // 设置环境变量
@@ -11,11 +12,10 @@ process.env.REACT_WEBPACK_ENV = 'dev';
 
 
 // 添加webpack-dev-server
-base.entry = [
+base.entry.app.unshift(
     `webpack-dev-server/client?http://${config.host}:${config.port}`,
-    'webpack/hot/only-dev-server',
-    base.entry.app
-];
+    'webpack/hot/only-dev-server'
+);
 
 // 添加js|jsx loader
 base.module.loaders.push({
@@ -34,7 +34,8 @@ module.exports = Object.assign({}, base, {
             manifest: require('./vendor/manifest')
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        new Template()
     ],
     devServer: {
         hot: true,
