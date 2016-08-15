@@ -1,0 +1,20 @@
+@import "~css/config";
+
+.page-header {
+    height: rem(50px);
+    border-bottom: 1px solid $borderColor;
+    background-color: white;
+
+    & > .container {
+        height: 100%;
+        padding: rem(10px, 0);
+    }
+}
+
+.page-logo {
+    width: rem(120px);
+    height: rem(32px);
+    background: url(~img/edonet.svg) no-repeat center;
+    text-indent: -1000px;
+    overflow: hidden;
+}

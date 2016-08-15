@@ -1,0 +1,19 @@
+@import '~css/config';
+
+.index-art-three {
+    padding: 50px 80px 50px 145px;
+
+    & > .fr {
+        width: 360px;
+        padding: 70px 40px;
+        box-sizing: border-box;
+        border-left: 1px solid $borderColor;
+    }
+
+    & > .fl {
+        width: 380px;
+        height: 190px;
+        margin-top: 10px;
+        border-bottom: 1px solid $borderColor;
+    }
+}

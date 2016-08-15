@@ -1,0 +1,12 @@
+@import '~css/config';
+
+.index-art-four {
+    padding: 40px 60px;
+    background: url(./lib.svg) no-repeat 440px center;
+
+    & > .fl {
+        width: 200px;
+        padding: 60px 40px;
+        border-right: 1px solid $borderColor;
+    }
+}

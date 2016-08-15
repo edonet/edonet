@@ -1,0 +1,44 @@
+@import '~css/config';
+
+.index-art-two {
+    padding: 20px 60px;
+    background: url(./gear.svg) no-repeat 700px 50px;
+    background-size: 160px auto;
+
+    & > .align-r {
+        @extend %inline;
+
+        width: 200px;
+        padding: 60px 40px;
+    }
+}
+
+.index-two-list {
+    @extend %inline;
+
+    width: 260px;
+    padding: 40px 40px 30px;
+    border-left: 1px solid $borderColor;
+    cursor: default;
+
+    & > .fl {
+        $color: #0091ea;
+        @include round;
+
+        padding: 3px 10px;
+        margin-right: 15px;
+        margin-bottom: 10px;
+        border: 1px solid $color;
+        font-size: 12px;
+        transition:
+            color .3s ease-in-out,
+            background-color .3s, ease-in-out;
+        color: $color;
+        background-color: rgba($color, 0);
+
+        &:hover {
+            color: white;
+            background-color: rgba($color, 1);
+        }
+    }
+}

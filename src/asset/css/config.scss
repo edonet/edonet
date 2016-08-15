@@ -1,0 +1,137 @@
+/*
+ * 功能：基本设置
+ * 作者：lifx
+ * 日期：2016-08-01
+ */
+
+$baseSize: 14px;
+$baseColor: #333;
+$borderColor: #e5e5e5;
+$backgroundColor: #f5f5f5;
+$mainColor: #ff1f68;
+$infoColor: green;
+$warnColor: orange;
+$errorColor: red;
+$containerSize: 1000px;
+
+
+// pixels to rem
+@function px2rem($px) {
+    @if unit($px) == 'px' {
+        @return $px / $baseSize * 1rem;
+    }
+
+    @return $px;
+}
+
+// rem value list
+@function rem($px...) {
+    $len: length($px);
+
+    @if $len == 0 {
+        @return 1rem;
+    }
+
+    $rem: px2rem(nth($px, 1));
+
+    @if $len > 1 {
+        @for $i from 2 through $len {
+            $rem: append($rem, px2rem(nth($px, $i)));
+        }
+    }
+
+    @return $rem;
+}
+
+// ratio:2
+@mixin ratio($selector: '&') {
+    @media screen and (-webkit-device-pixel-ratio: 2) {
+        #{$selector} {
+            @content;
+        }
+    }
+}
+
+// placeholder
+@mixin placeholder($selector: '&') {
+    #{$selector}::-webkit-input-placeholder {
+        @content;
+    }
+    #{$selector}:-moz-placeholder {
+        @content;
+    }
+    #{$selector}::-moz-placeholder {
+        @content;
+    }
+    #{$selector}:-ms-input-placeholder {
+        @content;
+    }
+}
+
+// round
+@mixin round($size: 3px) {
+    border-radius: rem($size);
+}
+
+// circle
+@mixin circle($size: 10px) {
+    display: inline-block;
+    width: rem($size);
+    height: rem($size);
+    border-radius: 50%;
+}
+
+// arrow
+@mixin arrow-r($size: 10px, $color: $borderColor) {
+    position: relative;
+
+    &::after {
+        content: "";
+        display: block;
+        width: rem($size);
+        height: rem($size);
+        position: absolute;
+        top: 50%;
+        right: rem(10px);
+        transform: translateY(-50%) rotate(45deg);
+        border-width: rem(1px, 1px, 0, 0);
+        border-style: solid;
+        border-color: $color;
+    }
+}
+
+
+// full
+%box {
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+// page
+%page {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+// center
+%center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// inline
+%inline {
+    display: inline-block;
+    vertical-align: middle;
+}

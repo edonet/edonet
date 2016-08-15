@@ -1,0 +1,91 @@
+@import '~css/config';
+
+.index-content-first {
+    padding: 40px 80px;
+
+    & > .fl {
+        width: 430px;
+        height: 300px;
+        box-sizing: border-box;
+        padding-left: 80px;
+        padding-top: 65px;
+        background:
+            url(./earth.svg) no-repeat 65px 38px,
+            url(./ipad.png) no-repeat;
+        background-size: auto, contain;
+    }
+
+    & > .fr {
+        width: 300px;
+        padding-top: 30px;
+    }
+}
+
+.index-one-list {
+    padding: 10px 0;
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 30px;
+    border-left: 1px solid $borderColor;
+    color: #888;
+
+    & > li::before {
+        content: '';
+        display: inline-block;
+        height: 20px;
+        margin-right: 10px;
+        transition:
+            width .3s ease-in-out,
+            background-color .3s ease-in-out;
+        vertical-align: middle;
+    }
+
+    & > li:nth-child(1) {
+
+        &::before {
+            width: 120px;
+            background-color: #5fc8fb;
+        }
+
+        &:hover::before {
+            width: 130px;
+            background-color: #38b7e8;
+        }
+    }
+
+    & > li:nth-child(2) {
+
+        &::before {
+            width: 160px;
+            background-color: #ff68a3;
+        }
+
+        &:hover::before {
+            width: 170px;
+            background-color: #fc4c94;
+        }
+    }
+
+    & > li:nth-child(3) {
+        &::before {
+            width: 135px;
+            background-color: #4195e0;
+        }
+
+        &:hover::before {
+            width: 145px;
+            background-color: #2a8bd3;
+        }
+    }
+}
+
+.index-one-time {
+    color: #999;
+    font-size: 36px;
+    line-height: 1em;
+}
+
+.index-one-date {
+    color: #999;
+    font-size: 12px;
+}
