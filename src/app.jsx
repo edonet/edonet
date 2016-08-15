@@ -1,11 +1,12 @@
 'use strict';
 
-require('./app.scss');
+require('css/common.scss');
 
 import React from 'react';
 import { render } from 'react-dom';
+import Index from './containers/index';
 
 render(
-    <div>hellow wold</div>,
+    <Index />,
     document.getElementById('root')
 );

@@ -4,7 +4,7 @@ const
     webpack = require('webpack'),
     config = require('./config'),
     base = require('./base'),
-    Template = require('./utils/template');
+    utils = require('./utils');
 
 
 // 设置环境变量
@@ -31,11 +31,14 @@ module.exports = Object.assign({}, base, {
     plugins: [
         new webpack.DllReferencePlugin({
             context: config.src,
-            manifest: require('./vendor/manifest')
+            manifest: require(config.manifest)
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        new Template()
+        new utils.TemplatePlugin({
+            title: 'edonet',
+            assets: 'vendor'
+        })
     ],
     devServer: {
         hot: true,

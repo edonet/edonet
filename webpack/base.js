@@ -12,8 +12,8 @@ module.exports = {
     },
     output: {
         path: config.dist,
-        publicPath: '/asset/',
-        filename: '[name]-[hash].min.js'
+        publicPath: '/',
+        filename: 'js/[name]-[hash].min.js'
     },
     resolve: {
         alias: {

@@ -1,9 +1,9 @@
 'use strict';
 
 const
-    path = require('path'),
     webpack = require('webpack'),
-    config = require('./config');
+    config = require('./config'),
+    utils = require('./utils');
 
 
 module.exports = {
@@ -11,15 +11,17 @@ module.exports = {
         vendor: config.vendor
     },
     output: {
-        path: path.join(__dirname, './vendor'),
-        filename: '[name]-[hash].min.js',
+        path: config.dist,
+        filename: 'js/[name]-[hash].min.js',
         library: '[name]'
     },
     plugins: [
         new webpack.DllPlugin({
-          path: path.resolve(__dirname, './vendor/manifest.json'),
+          path: config.manifest,
           name: '[name]',
           context: config.src
-        })
+        }),
+        new utils.AssetsPlugin('vendor'),
+        new utils.TransferPlugin(['favicon.ico'])
     ]
 };

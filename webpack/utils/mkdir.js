@@ -2,30 +2,57 @@
 
 const
     fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    stat = require('./stat');
 
 
-// 异步创建文件目录
-function mkdir(dir, mode, callback) {
-    fs.stat(dir, function (err, stats) {
-        if (err) {
-            return mkdir(path.dirname(dir), mode, function () {
-                fs.mkdir(dir, mode, callback);
-            });
+// 异步生成目录
+function mkdir (dir, mode, callback) {
+    stat(dir, function (err, stats) {
+        if (stats) {
+            return callback(null);
         }
 
-        callback(null, stats);
+        let parent = path.dirname(dir);
+
+        if (parent === dir) {
+            return callback(new Error('root dir not exists'));
+        }
+
+        mkdir(parent, mode, function (err) {
+            if (err) {
+                return callback(err);
+            }
+
+            fs.mkdir(dir, mode, callback);
+        });
     });
 }
 
-// 同步创建文件目录
-function mkdirSync(dir, mode) {
-    try {
-        return fs.statSync(dir);
-    } catch (e) {
-        mkdirSync(path.dirname(dir), mode);
-        fs.mkdirSync(dir, mode);
-        return fs.statSync(dir);
+// 同步生成目录
+function mkdirSync (dir, mode) {
+    let stats = stat(dir),
+        parent;
+
+    if (stats) {
+        return true;
+    }
+
+    parent = path.dirname(dir);
+
+    if (parent === dir) {
+        return false;
+    }
+
+    if (mkdirSync(parent, mode)) {
+        try {
+            fs.mkdirSync(dir);
+            return true;
+        } catch(e) {
+            return false;
+        }
+    } else {
+        return false;
     }
 }
 
@@ -34,10 +61,9 @@ function mkdirSync(dir, mode) {
 module.exports = function (dir, mode, callback) {
     if (typeof mode === 'function') {
         callback = mode;
-        mode = 0o777;
+        mode = undefined;
     }
 
-    callback ? mkdir(dir, mode, callback) : mkdirSync(dir, mode);
+    return typeof callback === 'function' ?
+        mkdir(dir, mode, callback) : mkdirSync(dir, mode);
 };
-
-console.log(mkdirSync('./abc/bd'));

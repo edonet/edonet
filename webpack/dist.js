@@ -5,7 +5,7 @@ const
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     config = require('./config'),
     base = require('./base'),
-    Template = require('./utils/template');
+    utils = require('./utils');
 
 
 // 设置环境变量
@@ -32,7 +32,7 @@ module.exports = Object.assign({}, base, {
     plugins: [
         new webpack.DllReferencePlugin({
             context: config.src,
-            manifest: require('./vendor/manifest')
+            manifest: require(config.manifest)
         }),
         new webpack.optimize.DedupePlugin(),
         new webpack.DefinePlugin({
@@ -44,9 +44,10 @@ module.exports = Object.assign({}, base, {
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.AggressiveMergingPlugin(),
         new webpack.NoErrorsPlugin(),
-        new ExtractTextPlugin('[name]-[hash].css'),
-        new Template({
-            title: 'edonet'
+        new ExtractTextPlugin('css/[name]-[hash].css'),
+        new utils.TemplatePlugin({
+            title: 'edonet',
+            assets: ['vendor']
         })
     ]
 });
