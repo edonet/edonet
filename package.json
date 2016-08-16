@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js --env=dev",
-    "vendor": "webpack --env=vendor",
-    "dist": "webpack --env=dist",
+    "vendor": "npm run clean && webpack --env=vendor",
+    "dist": "npm run vendor && webpack --env=dist",
     "clean": "node ./webpack/clean.js",
-    "transfer": "node ./webpack/transfer.js",
+    "test": "node server.js --env=test",
     "beta": "node server.js --env=beta",
-    "test": "node server.js --env=test"
+    "transfer": "node ./webpack/transfer.js"
   },
   "keywords": [
     "edonet",

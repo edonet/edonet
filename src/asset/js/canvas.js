@@ -14,9 +14,11 @@ function Canvas(id) {
     if(ele && ele.tagName === 'CANVAS'){
         this.canvas = ele;
         this.context = ele.getContext('2d');
+        this.ratio = window.devicePixelRatio || 1;
 
-        this.width = this.canvas.width = ele.offsetWidth;
-        this.height = this.canvas.height = ele.offsetHeight;
+        this.width = this.canvas.width = ele.offsetWidth * this.ratio;
+        this.height = this.canvas.height = ele.offsetHeight * this.ratio;
+        this.context.scale(this.ratio, this.ratio);
 
         this.center = {
             x: this.width / 2,

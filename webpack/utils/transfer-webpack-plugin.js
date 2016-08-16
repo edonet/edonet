@@ -2,7 +2,7 @@
 
 const
     path = require('path'),
-    copy = require('./copy');
+    transfer = require('./transfer');
 
 class TransferWebpackPlugin {
     constructor(...args) {
@@ -41,17 +41,9 @@ class TransferWebpackPlugin {
             dist = compiler.options.output.path;
         }
 
-        if (map instanceof Array) {
-            for (let name of map) {
-                copy(path.resolve(src, name), path.resolve(dist, name));
-            }
-        } else {
-            for (let key in map) {
-                if (map.hasOwnProperty(key)) {
-                    copy(path.resolve(src, key), path.resolve(dist, map[key]));
-                }
-            }
-        }
+        process.nextTick(() => {
+            transfer(src, dist, map);
+        });
     }
 }
 

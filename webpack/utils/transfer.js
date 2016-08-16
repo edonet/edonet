@@ -3,6 +3,7 @@
 const
     path = require('path'),
     copy = require('./copy'),
+    mkdir = require('./mkdir'),
     rmdir = require('./rmdir'),
     readdir = require('./readdir');
 
@@ -17,33 +18,31 @@ function transfer(src, dist) {
 }
 
 module.exports = (src, dist, map) => {
-    if (map instanceof Array) {
-        for (let name of map) {
-            transfer(path.resolve(src, name), path.resolve(dist, name));
+    mkdir(dist, err => {
+        if (err) {
+            console.log(err);
         }
-        return true;
-    }
 
-    if (typeof map === 'object') {
-        for (let key in map) {
-            if (map.hasOwnProperty(key)) {
-                transfer(path.resolve(src, key), path.resolve(dist, map[key]));
+        if (map instanceof Array) {
+            for (let name of map) {
+                transfer(path.resolve(src, name), path.resolve(dist, name));
             }
+        } else if (typeof map === 'object') {
+            for (let key in map) {
+                if (map.hasOwnProperty(key)) {
+                    transfer(path.resolve(src, key), path.resolve(dist, map[key]));
+                }
+            }
+        } else if (map === undefined) {
+            readdir(src, (err, files) => {
+                if (err) {
+                    return console.log(err);
+                }
+
+                for (let name of files) {
+                    transfer(path.join(src, name), path.join(dist, name));
+                }
+            });
         }
-        return true;
-    }
-
-    if (map === undefined) {
-        readdir(src, (err, files) => {
-            if (err) {
-                return console.log(err);
-            }
-
-            for (let name of files) {
-                transfer(path.join(src, name), path.join(dist, name));
-            }
-        });
-    }
-
-    return false;
+    });
 };
