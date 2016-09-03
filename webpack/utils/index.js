@@ -13,8 +13,6 @@ module.exports = {
     json: require('./json'),
     stream: require('./stream'),
     step: require('./step'),
-    server: require('./server'),
-    mime: require('./mime'),
     transfer: require('./transfer'),
     TemplatePlugin: require('./html-webpack-plugin'),
     AssetsPlugin: require('./assets-webpack-plugin'),

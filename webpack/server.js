@@ -3,9 +3,9 @@
 const
     webpack = require('webpack'),
     WebpackDevServer = require('webpack-dev-server'),
+    server = require('edonet-server'),
     config = require('./config'),
-    options = require('./dev'),
-    utils = require('./utils');
+    options = require('./dev');
 
 function createDevServer() {
     // 启动服务器
@@ -21,7 +21,7 @@ function createDevServer() {
 }
 
 function createTestServer(dir) {
-    return utils.server(dir || config.dist).listen(config.port);
+    return server(dir || config.dist).listen(config.port);
 }
 
 module.exports = env => {

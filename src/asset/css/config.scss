@@ -9,10 +9,14 @@ $baseColor: #333;
 $borderColor: #e5e5e5;
 $backgroundColor: #f5f5f5;
 $mainColor: #ff1f68;
+$grayColor: #aaa;
 $infoColor: green;
 $warnColor: orange;
 $errorColor: red;
-$containerSize: 1000px;
+
+// 布局设置
+$headerHeight: 50px;
+$containerSize: 980px;
 
 
 // pixels to rem

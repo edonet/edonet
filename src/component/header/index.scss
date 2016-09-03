@@ -1,9 +1,10 @@
 @import "~css/config";
 
 .page-header {
-    height: rem(50px);
+    height: $headerHeight;
     border-bottom: 1px solid $borderColor;
     background-color: white;
+    z-index: 100;
 
     & > .container {
         height: 100%;
