@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import Icon from '../icon';
 import Markdown from '../markdown';
+import CodeEditor from '../code-editor';
 
 require('./index.scss');
 
@@ -42,8 +43,8 @@ export default class Editor extends Component {
                     </div>
                 </div>
                 <div className="article-content">
-                    <div className="container">
-                        <textarea className="editor-area" onBlur={ this.saveCode.bind(this) } defaultValue={ code } />
+                    <div className="article-editor container">
+                        <CodeEditor update={ this.saveCode.bind(this) } code={ code } />
                     </div>
                 </div>
             </div>
@@ -86,8 +87,8 @@ export default class Editor extends Component {
         this.setState({ mode: 'view' });
     }
 
-    saveCode(e) {
-        localStorage.setItem(this.localStorageId, e.target.value);
+    saveCode(code) {
+        localStorage.setItem(this.localStorageId, code);
     }
 
     downloadCode() {

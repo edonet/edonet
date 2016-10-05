@@ -39,27 +39,20 @@
     @extend %page;
 
     display: flex;
-    top: $headerHeight + 68px;
+    top: $headerHeight + 70px;
     background-color: white;
 }
 
-.article-view {
-    padding: 40px;
+.article-editor {
+    padding-right: 20px;
     border-left: 1px solid $borderColor;
     border-right: 1px solid $borderColor;
+}
+
+.article-view {
+    @extend .article-editor;
+
+    padding: 40px;
     overflow-y: auto;
 }
 
-.editor-area {
-    @extend %box;
-
-    border: 0;
-    padding: 20px;
-    line-height: 1.5em;
-    border-left: 1px solid $borderColor;
-    resize: none;
-
-    &:focus {
-        outline: none;
-    }
-}
